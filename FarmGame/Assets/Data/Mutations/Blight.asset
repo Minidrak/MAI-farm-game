@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ab0e056d351904d985dcd49a4caed3, type: 3}
+  m_Name: Blight
+  m_EditorClassIdentifier: Assembly-CSharp::FarmSimulator.Data.MutationData
+  mutationName: "\u041F\u043E\u0440\u0447\u0430"
+  description: "\u041F\u043E\u0440\u0447\u0430. \u0411\u043E\u043B\u0435\u0437\u043D\u0435\u043D\u043D\u0430\u044F
+    \u043C\u0443\u0442\u0430\u0446\u0438\u044F \u0441\u043D\u0438\u0436\u0430\u0435\u0442
+    \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0438 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E
+    \u0443\u0440\u043E\u0436\u0430\u044F."
+  icon: {fileID: 0}
+  type: 6
+  rarity: 0
+  growthRateMultiplier: 0.8
+  yieldMultiplier: 0.78
+  mutationChanceDelta: 0.05
+  valueMultiplier: 0.85
+  vfxPrefab: {fileID: 0}
+  particleColor: {r: 0.5, g: 0.4, b: 0.2, a: 1}
+  spawnWeight: 25

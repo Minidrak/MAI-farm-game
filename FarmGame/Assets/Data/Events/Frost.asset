@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3996bd2159ec724dbf7ea3c8ceda8ff, type: 3}
+  m_Name: Frost
+  m_EditorClassIdentifier: Assembly-CSharp::FarmSimulator.Data.EventData
+  eventName: "\u041C\u043E\u0440\u043E\u0437"
+  description: "\u041F\u043B\u043E\u0445\u043E\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u0435.
+    \u041C\u043E\u0440\u043E\u0437 \u043F\u043E\u0440\u0442\u0438\u0442 \u043F\u043E\u0447\u0432\u0443,
+    \u0443\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0432\u043B\u0430\u0433\u0443
+    \u0438 \u043C\u043E\u0436\u0435\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E
+    \u0437\u0430\u0441\u0442\u043E\u043F\u043E\u0440\u0438\u0442\u044C \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u0435
+    \u0440\u0430\u0441\u0442\u0435\u043D\u0438\u0439."
+  icon: {fileID: 0}
+  type: 0
+  severity: 0
+  effect:
+    growthRateDelta: -0.28
+    yieldDelta: -0.05
+    mutationChanceDelta: 0
+    soilFertilityDelta: 0
+    soilMoistureDelta: 0
+    infectionChance: 0
+  duration: 120
+  isPositive: 0
+  eventMutation: {fileID: 11400000, guid: e03ab64e2ae10d64291eb7f4076a1cad, type: 2}
+  mutationChancePerPlant: 0.03
+  mutationTickInterval: 15
+  destroyPlantChanceOnMutation: 0
+  requiredPlantDensity: 0
+  affectedGroups: 
+  affectsAllGroups: 1
+  vfxPrefab: {fileID: 0}
+  skyboxMaterial: {fileID: 2100000, guid: 98f3f134548294844b195e7b6c8f962d, type: 2}
+  directionalLightColor: {r: 0.84, g: 0.92, b: 1, a: 1}
+  directionalLightIntensity: 0.96
+  ambientColor: {r: 0.55, g: 0.66, b: 0.76, a: 1}
+  fogColor: {r: 0.76, g: 0.84, b: 0.91, a: 1}
+  fogDensity: 0.014
+  visualPriority: 65
+  blendInSeconds: 2
+  blendOutSeconds: 2.1
+  weight: 10
