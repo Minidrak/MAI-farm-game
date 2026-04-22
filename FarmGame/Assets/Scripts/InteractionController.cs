@@ -148,6 +148,7 @@ namespace FarmSimulator.Player
 
             if (_currentCell == null)
             {
+                AudioManager.Instance?.Play(AudioCue.Error, 0.8f);
                 return;
             }
 
@@ -156,7 +157,12 @@ namespace FarmSimulator.Player
                 if (_economy.TrySpend(GridCell.RepairCost))
                 {
                     _currentCell.RestoreBed();
+                    AudioManager.Instance?.PlayAt(AudioCue.Repair, _currentCell.transform.position, 1f);
                     OnCellInteracted?.Invoke(_currentCell);
+                }
+                else
+                {
+                    AudioManager.Instance?.Play(AudioCue.Error);
                 }
                 return;
             }
@@ -166,7 +172,12 @@ namespace FarmSimulator.Player
                 if (_inventory != null && _inventory.HasWateringCan)
                 {
                     _currentCell.Water();
+                    AudioManager.Instance?.PlayAt(AudioCue.Water, _currentCell.transform.position, 1f);
                     OnCellInteracted?.Invoke(_currentCell);
+                }
+                else
+                {
+                    AudioManager.Instance?.Play(AudioCue.Error);
                 }
                 return;
             }
@@ -176,9 +187,20 @@ namespace FarmSimulator.Player
                 PlantData selected = SelectedPlant;
                 if (selected != null && _inventory != null && _inventory.TryConsumeSeed(selected))
                 {
-                    _currentCell.TryPlant(selected);
-                    _gridManager.RecalcAllNeighborBonuses();
-                    OnCellInteracted?.Invoke(_currentCell);
+                    if (_currentCell.TryPlant(selected))
+                    {
+                        AudioManager.Instance?.PlayAt(AudioCue.Plant, _currentCell.transform.position, 1f);
+                        _gridManager.RecalcAllNeighborBonuses();
+                        OnCellInteracted?.Invoke(_currentCell);
+                    }
+                    else
+                    {
+                        AudioManager.Instance?.Play(AudioCue.Error);
+                    }
+                }
+                else
+                {
+                    AudioManager.Instance?.Play(AudioCue.Error);
                 }
 
                 return;
@@ -188,12 +210,18 @@ namespace FarmSimulator.Player
             {
                 if (_economy.TryHarvestToInventory(_currentCell, _inventory))
                 {
+                    AudioManager.Instance?.PlayAt(AudioCue.Harvest, _currentCell.transform.position, 1f);
                     _gridManager.RecalcAllNeighborBonuses();
                     OnCellInteracted?.Invoke(_currentCell);
+                }
+                else
+                {
+                    AudioManager.Instance?.Play(AudioCue.Error);
                 }
                 return;
             }
 
+            AudioManager.Instance?.Play(AudioCue.UiSelect, 0.65f);
             OnCellInteracted?.Invoke(_currentCell);
         }
 
@@ -210,13 +238,23 @@ namespace FarmSimulator.Player
                 case WorldInteractionZoneType.Shop:
                     if (_economy.TryBuySeed(selected, _inventory))
                     {
+                        AudioManager.Instance?.Play(AudioCue.Buy, 1f);
                         OnCellInteracted?.Invoke(null);
+                    }
+                    else
+                    {
+                        AudioManager.Instance?.Play(AudioCue.Error);
                     }
                     break;
                 case WorldInteractionZoneType.SellStall:
                     if (_economy.TrySellCropFromInventory(_inventory, selected))
                     {
+                        AudioManager.Instance?.Play(AudioCue.Sell, 1f);
                         OnCellInteracted?.Invoke(null);
+                    }
+                    else
+                    {
+                        AudioManager.Instance?.Play(AudioCue.Error);
                     }
                     break;
             }
@@ -231,7 +269,12 @@ namespace FarmSimulator.Player
 
             if (_economy.TryBuyWateringCan(_inventory))
             {
+                AudioManager.Instance?.Play(AudioCue.Buy, 0.95f);
                 OnCellInteracted?.Invoke(null);
+            }
+            else
+            {
+                AudioManager.Instance?.Play(AudioCue.Error);
             }
         }
 
@@ -259,10 +302,12 @@ namespace FarmSimulator.Player
             if (ReadPreviousSeedPressed())
             {
                 _selectedPlantIndex = (_selectedPlantIndex - 1 + _availablePlants.Length) % _availablePlants.Length;
+                AudioManager.Instance?.Play(AudioCue.UiSelect, 0.7f);
             }
             else if (ReadNextSeedPressed())
             {
                 _selectedPlantIndex = (_selectedPlantIndex + 1) % _availablePlants.Length;
+                AudioManager.Instance?.Play(AudioCue.UiSelect, 0.7f);
             }
         }
 

@@ -13,9 +13,11 @@ namespace FarmSimulator.Player
         [SerializeField] private float _rotationSpeed = 12f;
         [SerializeField] private Animator _animator;
         [SerializeField] private SimpleHumanoidLocomotion _locomotionVisuals;
+        [SerializeField] private float _footstepInterval = 0.38f;
 
         private CharacterController _characterController;
         private bool _hasSpeedParameter;
+        private float _footstepTimer;
 
         public Vector3 MoveInput { get; private set; }
         public bool IsMoving => MoveInput.sqrMagnitude > 0.001f;
@@ -69,6 +71,7 @@ namespace FarmSimulator.Player
             }
 
             _locomotionVisuals?.SetMoveAmount(MoveInput.magnitude);
+            UpdateFootsteps();
         }
 
         public void Configure(Transform cameraPivot, float moveSpeed)
@@ -129,6 +132,25 @@ namespace FarmSimulator.Player
             }
 
             return false;
+        }
+
+        private void UpdateFootsteps()
+        {
+            if (_characterController == null || !_characterController.isGrounded || MoveInput.sqrMagnitude <= 0.02f)
+            {
+                _footstepTimer = 0f;
+                return;
+            }
+
+            _footstepTimer += Time.deltaTime;
+            float interval = Mathf.Lerp(_footstepInterval * 1.2f, _footstepInterval * 0.72f, MoveInput.magnitude);
+            if (_footstepTimer < interval)
+            {
+                return;
+            }
+
+            _footstepTimer = 0f;
+            AudioManager.Instance?.Play(AudioCue.Footstep, Mathf.Lerp(0.75f, 1f, MoveInput.magnitude));
         }
     }
 }
